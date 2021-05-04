@@ -1,0 +1,58 @@
+$primary: white
+$animate: .5s all ease
+$ff: "Akzidenz-Grotesk", sans-serif
+$ff--bold: "Akzidenz-GroteskBlack", sans-serif
+
+$xl: 1199.98px;
+$lg: 991.98px;
+$md: 767.98px;
+$sm: 575.98px;
+
+
+.container
+    padding: 0 15px
+
+    @media (min-width: 575.98px)
+        padding: 0 calc(50vw - 270px)
+
+    @media (min-width: 767.98px)
+        padding: 0 calc(50vw - 360px)
+
+    @media (min-width: 991.98px)
+        padding: 0 calc(50vw - 480px)
+
+    @media (min-width: 1199.98px)
+        padding: 0 calc(50vw - 590px);
+
+
+
+h1,h2,h3,h4,h5,h6
+    font-family: $ff
+    font-weight: normal
+    color: white
+    text-transform: uppercase
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+
+.btn
+    font-family: "Euclid Flex"
+    line-height: 20px
+    font-size: 1rem
+    text-decoration: none
+    color: $primary
+    position: relative
+    cursor: pointer
+    &:before
+        content: ""
+        position: absolute
+        bottom: -10px
+        width: 0px
+        height: 2px
+        margin: 5px 0 0
+        transition: $animate
+        opacity: 0
+        background-color: $primary
+    &:hover
+        &:before
+            width: 100%
+            opacity: 1

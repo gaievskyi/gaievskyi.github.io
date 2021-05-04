@@ -1,0 +1,315 @@
+*
+    box-sizing: border-box
+
+@media (pointer: none), (pointer: coarse)
+    #cursor, #cursor .cursor-icon
+            display: none !important
+            visibility: hidden
+            opacity: 0
+    *
+        cursor: auto !important
+
+.cursor
+    pointer-events: none
+    transition: 0.3s ease-out
+    z-index: 999999
+    position: fixed
+    top: 0
+    left: 0
+    width: 100px
+    height: 100px
+    border-radius: 50%
+    top: var(--y, 0)
+    left: var(--x, 0)
+    mix-blend-mode: difference
+
+.cursor-icon
+    visibility: visible
+    opacity: 1
+    background-color: #fff
+    background: white
+    width: 100%
+    height: 100%
+    border-radius: 50%
+    transition: $animate
+
+.cursor--hidden
+    opacity: 0 !important
+    visibility: hidden !important
+
+.cursor.cursor--hover .cursor-icon
+    transform: scale(2)
+
+body
+    font-family: "Euclid Flex"
+    font-weight: normal
+    background-color: #000
+    color: white
+    display: grid
+    grid-template-rows: auto 1fr auto
+    position: relative
+
+    &.hide-overflow
+        overflow-y: hidden
+
+.profile
+    min-height: 100vh
+
+    .container-fluid
+        padding: 0 15px
+    & .nav
+        width: 100%
+        z-index: 3
+        margin: 0
+        line-height: 0
+        padding: 30px
+        background-color: #000
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+    & .logo
+       font-family: $ff
+
+    & .nav__btn-wrapper
+        z-index: 12
+        justify-self: flex-end
+
+    & .burger-btn
+        justify-self: flex-end
+        z-index: 12
+        outline: none
+        background-color: transparent
+        border: none
+        cursor: pointer
+        padding: 0
+
+        & .line
+            fill: none
+            stroke: white
+            stroke-width: 6
+            transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1)
+
+        & .line1
+            stroke-dasharray: 60 207
+            stroke-width: 6
+
+        & .line2
+            stroke-dasharray: 60 60
+            stroke-width: 6
+
+        & .line3
+            stroke-dasharray: 60 207
+            stroke-width: 6
+
+        &--active
+            & .line1
+                stroke-dasharray: 90 207
+                stroke-dashoffset: -134
+                stroke-width: 6
+
+            & .line2
+                stroke-dasharray: 1 60
+                stroke-dashoffset: -30
+                stroke-width: 6
+
+            & .line3
+                stroke-dasharray: 90 207
+                stroke-dashoffset: -134
+                stroke-width: 6
+    & .menu
+        text-transform: uppercase
+        display: flex
+        list-style: none
+        transform: translate(0, -100%)
+        transition: transform 0.6s ease
+        padding: 0
+        margin: 0
+        background-color: rgba(#000, 0.9)
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        position: fixed
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        overflow: auto
+        z-index: 11
+
+        &--active
+            transform: translate(0, 0%)
+
+        &__item
+            margin: 50px 0
+            &:first-child
+                margin-top: 0
+
+        &__link
+            font-family: $ff
+            color: $primary
+            font-weight: 900
+            font-size: 72px
+            transition: $animate
+            @media screen and (max-width: $md)
+                font-size: 40px
+
+
+    & .main
+        width: 100%
+        display: flex
+        align-items: center
+        flex-direction: column
+
+    & .hero
+        width: 100%
+        height: auto
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+        &__img
+            filter: invert(75%)
+            position: relative
+            transition: 1s ease-out
+            position: relative
+            max-width: 480px
+            max-height: 480px
+
+        &__inner
+            position: absolute
+            margin: 0
+            padding: 0
+            width: 100%
+            line-height: 1
+
+        &__text
+            text-align: center
+
+            & .title
+                font-family: $ff
+                margin: 0
+                padding: 0
+                font-weight: normal
+                text-transform: uppercase
+                font-size: 62px
+                -webkit-text-stroke-width: 1px
+                -webkit-text-stroke-color: transparent
+
+                @media screen and (max-width: $lg)
+                    font-size: 52px
+
+                @media screen and (max-width: $md)
+                    font-size: 42px
+
+                @media screen and (max-width: $sm)
+                    font-size: 35px
+        &__line
+            z-index: -1
+            height: 1px
+            background-color: white
+
+        &__marquee
+            z-index: -1
+            position: relative
+            overflow: hidden
+            --offset: 20vw
+            --move-initial: calc(-25% + var(--offset))
+            --move-final: calc(-50% + var(--offset))
+
+            width: 100%
+            font-family: $ff--bold, sans-serif
+            font-style: italic
+            font-size: 24px
+            text-transform: uppercase
+            color: transparent
+            -webkit-text-stroke-width: 1.5px
+            -webkit-text-stroke-color: white
+
+            & .marquee__inner
+                width: fit-content
+                display: inline-flex
+                align-items: center
+                position: relative
+                transform: translate3d(var(--move-initial), 0, 0)
+                animation: marquee 15s linear infinite
+                transition: $animate
+
+            & .line
+                display: inline-flex
+                height: 2px
+                width: 35px
+                background-color: #fff
+                margin: 0 30px
+
+
+            @keyframes marquee
+                0%
+                    transform: translate3d(var(--move-initial), 0, 0)
+
+                100%
+                    transform: translate3d(var(--move-final), 0, 0)
+
+.about
+    height: 400px
+    overflow: hidden
+    .info
+        font-size: 50px
+
+        &__title
+            text-align: center
+            color: transparent
+            margin: 0
+        &__text-wrapper
+            position: relative
+        &__text
+            transition: .2s ease-out
+            letter-spacing: 5px
+            top: 0
+            left: 0
+            position: absolute;
+            white-space: nowrap
+            width: 100%
+            margin-top: 0px
+.offer
+    .hire
+        text-align: center
+
+
+.footer
+    min-height: 50px
+    padding-top: 10px
+    padding-bottom: 10px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    text-align: center
+
+    & .links
+        display: flex
+        justify-content: center
+        font-size: 14px
+        list-style: none
+        font-weight: 800
+        margin-bottom: 10px
+
+        @media screen and (max-width: $sm)
+            flex-direction: column
+            justify-content: space-between
+
+        &__item
+            margin-right: 30px
+
+            @media screen and (max-width: $sm)
+                margin-right: 0
+                margin-bottom: 10px
+
+            &:last-child
+                margin-right: 0
+
+        & .link
+            color: $primary
+            transition: $animate
+            text-decoration: none
